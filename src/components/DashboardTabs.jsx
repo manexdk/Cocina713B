@@ -21,9 +21,9 @@ import Colaborativo from "./Colaborativo";
 import VozScanner from "./VozScanner";
 import Manual from "./Manual";
 
-const MENU1 = [
-  { name: "Inventario", key: "inv", icon: "📦" },
+const TABS = [
   { name: "Adjuntos", key: "adj", icon: "📎" },
+  { name: "Inventario", key: "inv", icon: "📦" },
   { name: "Alertas", key: "alertas", icon: "⏰" },
   { name: "Calendario", key: "cal", icon: "📅" },
   { name: "Colaborativo", key: "colab", icon: "🤝" },
@@ -34,10 +34,7 @@ const MENU1 = [
   { name: "Historial", key: "hist", icon: "📜" },
   { name: "Import/Export", key: "iexp", icon: "📤" },
   { name: "Lista compras", key: "listacomp", icon: "🛒" },
-  { name: "Manual", key: "manual", icon: "📖" }
-];
-
-const MENU2 = [
+  { name: "Manual", key: "manual", icon: "📖" },
   { name: "Meal planner", key: "mealplan", icon: "🥗" },
   { name: "Plan compras", key: "plancomp", icon: "🗓️" },
   { name: "Recetas", key: "recetas", icon: "🍲" },
@@ -54,7 +51,7 @@ export default function DashboardTabs({ user }) {
 
   function handleTabChange(key) {
     setTab(key);
-    setMenuOpen(false); // Cierra menú mobile después de seleccionar
+    setMenuOpen(false); // Cierra el menú mobile después de seleccionar
   }
 
   return (
@@ -63,70 +60,48 @@ export default function DashboardTabs({ user }) {
       <nav className="sticky top-0 z-30 w-full bg-white border-b border-gray-200 shadow-sm mb-2">
         <div className="flex items-center justify-between px-2 sm:px-6 py-2">
           <div className="flex items-center gap-2">
-            {/* Hamburguesa solo mobile */}
+            {/* Hamburguesa solo en mobile */}
             <button
               className="sm:hidden mr-2 text-2xl p-1 focus:outline-none"
               aria-label="Abrir menú"
               onClick={() => setMenuOpen(m => !m)}
             >
+              {/* Ícono hamburguesa */}
               <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
             <span className="font-extrabold text-lg sm:text-2xl text-gray-800 tracking-wide">Inventario 713</span>
           </div>
-          {/* Desktop menús */}
-          <div className="hidden sm:flex gap-4">
-            <div className="relative group">
-              <button className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-md flex items-center text-white">
-                📋 Menú ▼
+          {/* Desktop menú */}
+          <div className="hidden sm:flex gap-1">
+            {TABS.map(t => (
+              <button
+                key={t.key}
+                className={`px-3 py-2 rounded-t-2xl font-bold transition flex items-center gap-1 text-xs sm:text-sm
+                  ${tab === t.key
+                    ? "bg-gray-700 text-white border-b-2 border-gray-700 shadow"
+                    : "bg-gray-100 text-gray-700 border-b-2 border-transparent hover:bg-gray-300"
+                  }`}
+                onClick={() => handleTabChange(t.key)}
+              >
+                <span>{t.icon}</span> {t.name}
               </button>
-              <div className="absolute hidden group-hover:block bg-white text-black mt-2 rounded shadow-lg w-64 z-50">
-                {MENU1.map(t => (
-                  <div
-                    key={t.key}
-                    onClick={() => handleTabChange(t.key)}
-                    className={`px-4 py-2 hover:bg-gray-200 cursor-pointer flex items-center space-x-2 ${
-                      tab === t.key ? "font-bold text-gray-800" : ""
-                    }`}
-                  >
-                    <span>{t.icon}</span>
-                    <span>{t.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative group">
-              <button className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-md flex items-center text-white">
-                🛠️ Funciones ▼
-              </button>
-              <div className="absolute hidden group-hover:block bg-white text-black mt-2 rounded shadow-lg w-64 z-50">
-                {MENU2.map(t => (
-                  <div
-                    key={t.key}
-                    onClick={() => handleTabChange(t.key)}
-                    className={`px-4 py-2 hover:bg-gray-200 cursor-pointer flex items-center space-x-2 ${
-                      tab === t.key ? "font-bold text-gray-800" : ""
-                    }`}
-                  >
-                    <span>{t.icon}</span>
-                    <span>{t.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
         {/* Mobile menú desplegable */}
         {menuOpen && (
           <div className="sm:hidden px-4 py-3 border-t border-gray-200 bg-white shadow z-40 absolute w-full left-0">
             <div className="flex flex-col gap-1">
-              {[...MENU1, ...MENU2].map(t => (
+              {TABS.map(t => (
                 <button
                   key={t.key}
-                  className={`w-full text-left px-3 py-2 rounded-lg font-bold flex items-center gap-2 ${
-                    tab === t.key ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-800 hover:bg-gray-300"
-                  }`}
+                  className={`w-full text-left px-3 py-2 rounded-lg font-bold flex items-center gap-2
+                    ${tab === t.key
+                      ? "bg-gray-700 text-white"
+                      : "bg-gray-100 text-gray-800 hover:bg-gray-300"
+                    }`}
                   onClick={() => handleTabChange(t.key)}
                 >
                   <span>{t.icon}</span> {t.name}
