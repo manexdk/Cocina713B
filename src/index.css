@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Personalización pro gris */
+body {
+  @apply bg-gray-50 text-gray-700 antialiased;
+}
+
+button {
+  @apply transition-colors duration-200;
+}
+
+input, select {
+  @apply border border-gray-300 rounded px-2 py-1 text-sm focus:ring-2 focus:ring-gray-400;
+}
