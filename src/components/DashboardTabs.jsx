@@ -21,7 +21,7 @@ import Colaborativo from "./Colaborativo";
 import VozScanner from "./VozScanner";
 import Manual from "./Manual";
 
-const TABS = [
+const MENU1 = [
   { name: "Inventario", key: "inv", icon: "📦" },
   { name: "Adjuntos", key: "adj", icon: "📎" },
   { name: "Alertas", key: "alertas", icon: "⏰" },
@@ -34,7 +34,10 @@ const TABS = [
   { name: "Historial", key: "hist", icon: "📜" },
   { name: "Import/Export", key: "iexp", icon: "📤" },
   { name: "Lista compras", key: "listacomp", icon: "🛒" },
-  { name: "Manual", key: "manual", icon: "📖" },
+  { name: "Manual", key: "manual", icon: "📖" }
+];
+
+const MENU2 = [
   { name: "Meal planner", key: "mealplan", icon: "🥗" },
   { name: "Plan compras", key: "plancomp", icon: "🗓️" },
   { name: "Recetas", key: "recetas", icon: "🍲" },
@@ -43,7 +46,6 @@ const TABS = [
   { name: "Usuarios/Roles", key: "users", icon: "👥" },
   { name: "Voz/Scanner", key: "voz", icon: "🎤" }
 ];
-
 export default function DashboardTabs({ user }) {
   const [tab, setTab] = useState("inv");
   const [editing, setEditing] = useState(null);
