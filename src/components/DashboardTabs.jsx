@@ -22,8 +22,8 @@ import VozScanner from "./VozScanner";
 import Manual from "./Manual";
 
 const TABS = [
-  { name: "Adjuntos", key: "adj", icon: "📎" },
   { name: "Inventario", key: "inv", icon: "📦" },
+  { name: "Adjuntos", key: "adj", icon: "📎" },
   { name: "Alertas", key: "alertas", icon: "⏰" },
   { name: "Calendario", key: "cal", icon: "📅" },
   { name: "Colaborativo", key: "colab", icon: "🤝" },
